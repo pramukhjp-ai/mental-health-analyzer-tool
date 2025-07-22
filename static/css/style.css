@@ -1,0 +1,522 @@
+/* Modern Off-White Glass Design with Perfect Readability */
+
+/* Main Container and Typography */
+body {
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+    font-weight: 400;
+    line-height: 1.6;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    color: #2c3e50 !important;
+}
+
+/* Strong Text Contrast for Better Readability */
+h1, h2, h3, h4, h5, h6 {
+    color: #2c3e50 !important;
+    font-weight: 700 !important;
+    text-shadow: none !important;
+}
+
+p, span, div, li {
+    color: #34495e !important;
+    font-weight: 500 !important;
+    text-shadow: none !important;
+}
+
+/* Glass Card with Off-White Background */
+.glass-card {
+    background: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(25px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.8) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
+    border-radius: 20px !important;
+}
+
+/* Tab Navigation with Off-White Theme */
+.nav-tabs .nav-link {
+    color: #34495e !important;
+    background: rgba(255, 255, 255, 0.8) !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    font-weight: 600 !important;
+    font-size: 15px !important;
+    padding: 14px 24px !important;
+    margin-right: 8px !important;
+    border-radius: 12px 12px 0 0 !important;
+    transition: all 0.3s ease !important;
+    text-shadow: none !important;
+}
+
+.nav-tabs .nav-link:hover {
+    background: rgba(255, 255, 255, 0.95) !important;
+    color: #2c3e50 !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
+}
+
+.nav-tabs .nav-link.active {
+    background: rgba(255, 255, 255, 1) !important;
+    color: #2c3e50 !important;
+    border-bottom-color: transparent !important;
+    font-weight: 700 !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Question Cards with Clean Off-White Design */
+.question-card {
+    background: rgba(255, 255, 255, 0.9) !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    border-radius: 16px !important;
+    padding: 25px !important;
+    margin-bottom: 20px !important;
+    backdrop-filter: blur(15px) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08) !important;
+}
+
+.question-card h6 {
+    color: #2c3e50 !important;
+    font-weight: 700 !important;
+    font-size: 18px !important;
+    margin-bottom: 15px !important;
+    text-shadow: none !important;
+}
+
+.question-card p {
+    color: #34495e !important;
+    font-size: 16px !important;
+    line-height: 1.6 !important;
+    margin-bottom: 15px !important;
+    font-weight: 500 !important;
+    text-shadow: none !important;
+}
+
+/* Form Controls with Clean White Design */
+.form-control {
+    background: rgba(255, 255, 255, 0.95) !important;
+    border: 2px solid rgba(0, 0, 0, 0.1) !important;
+    color: #2c3e50 !important;
+    font-size: 15px !important;
+    padding: 15px 18px !important;
+    border-radius: 12px !important;
+    font-weight: 500 !important;
+}
+
+.form-control::placeholder {
+    color: rgba(52, 73, 94, 0.6) !important;
+    font-size: 15px !important;
+    font-weight: 500 !important;
+}
+
+.form-control:focus {
+    background: rgba(255, 255, 255, 1) !important;
+    border-color: #667eea !important;
+    color: #2c3e50 !important;
+    box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25) !important;
+}
+
+/* Beautiful Gradient Buttons */
+.btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    border: none !important;
+    color: #ffffff !important;
+    font-weight: 700 !important;
+    font-size: 16px !important;
+    padding: 15px 30px !important;
+    border-radius: 12px !important;
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3) !important;
+    transition: all 0.3s ease !important;
+    text-shadow: none !important;
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px) !important;
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4) !important;
+    background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%) !important;
+}
+
+.btn-primary:disabled {
+    background: rgba(0, 0, 0, 0.2) !important;
+    color: rgba(255, 255, 255, 0.7) !important;
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+/* Instructions Panel with Clean White Background */
+.instructions-panel {
+    background: rgba(255, 255, 255, 0.9) !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    border-radius: 16px !important;
+    padding: 25px !important;
+    margin-bottom: 25px !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08) !important;
+}
+
+.instructions-panel h6 {
+    color: #2c3e50 !important;
+    font-weight: 700 !important;
+    font-size: 18px !important;
+    margin-bottom: 15px !important;
+    text-shadow: none !important;
+}
+
+.instructions-panel p {
+    color: #34495e !important;
+    font-size: 16px !important;
+    line-height: 1.6 !important;
+    margin-bottom: 18px !important;
+    font-weight: 500 !important;
+    text-shadow: none !important;
+}
+
+.instructions-list {
+    margin: 0 !important;
+    padding-left: 25px !important;
+}
+
+.instructions-list li {
+    color: #34495e !important;
+    font-size: 15px !important;
+    margin-bottom: 12px !important;
+    line-height: 1.5 !important;
+    font-weight: 500 !important;
+    text-shadow: none !important;
+}
+
+/* Results Panel with Clean Design */
+.results-panel {
+    background: rgba(255, 255, 255, 0.9) !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    border-radius: 16px !important;
+    padding: 25px !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08) !important;
+}
+
+.results-panel h6 {
+    color: #2c3e50 !important;
+    font-weight: 700 !important;
+    font-size: 20px !important;
+    margin-bottom: 20px !important;
+    text-shadow: none !important;
+}
+
+/* Status Badges with Modern Colors */
+.question-status-badge {
+    background: rgba(255, 255, 255, 0.9) !important;
+    color: #2c3e50 !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    padding: 8px 16px !important;
+    border-radius: 20px !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    text-shadow: none !important;
+}
+
+.question-status-badge.recording {
+    background: linear-gradient(135deg, #ff416c, #ff4757) !important;
+    color: white !important;
+    animation: pulse 1.5s infinite !important;
+}
+
+.question-status-badge.ready {
+    background: linear-gradient(135deg, #00b894, #00a085) !important;
+    color: white !important;
+}
+
+/* Analysis Results with Clean White Background */
+.analysis-result {
+    background: rgba(255, 255, 255, 0.9) !important;
+    border-radius: 16px !important;
+    padding: 25px !important;
+    margin-bottom: 15px !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08) !important;
+}
+
+.analysis-result h5 {
+    color: #2c3e50 !important;
+    font-weight: 700 !important;
+    font-size: 22px !important;
+    margin-bottom: 15px !important;
+    text-shadow: none !important;
+}
+
+.analysis-result p {
+    color: #34495e !important;
+    font-size: 16px !important;
+    line-height: 1.6 !important;
+    font-weight: 500 !important;
+    text-shadow: none !important;
+}
+
+/* Metric Cards with White Glass Effect */
+.metric-card {
+    background: rgba(255, 255, 255, 0.95) !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    border-radius: 16px !important;
+    padding: 25px !important;
+    text-align: center !important;
+    margin-bottom: 15px !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08) !important;
+}
+
+.metric-value {
+    font-size: 32px !important;
+    font-weight: 800 !important;
+    color: #2c3e50 !important;
+    display: block !important;
+    margin-bottom: 10px !important;
+    text-shadow: none !important;
+}
+
+.metric-label {
+    font-size: 14px !important;
+    color: #7f8c8d !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+    text-shadow: none !important;
+}
+
+/* Progress Bars with Modern Design */
+.progress {
+    background: rgba(0, 0, 0, 0.1) !important;
+    border-radius: 10px !important;
+    height: 10px !important;
+    border: none !important;
+}
+
+.progress-bar {
+    background: linear-gradient(90deg, #667eea, #764ba2) !important;
+    border-radius: 10px !important;
+}
+
+/* Clean Notifications */
+.alert {
+    border-radius: 16px !important;
+    border: none !important;
+    font-weight: 600 !important;
+    font-size: 15px !important;
+    padding: 15px 20px !important;
+}
+
+.alert-success {
+    background: rgba(0, 184, 148, 0.1) !important;
+    color: #00b894 !important;
+    border-left: 4px solid #00b894 !important;
+    text-shadow: none !important;
+}
+
+.alert-danger {
+    background: rgba(255, 71, 87, 0.1) !important;
+    color: #ff4757 !important;
+    border-left: 4px solid #ff4757 !important;
+    text-shadow: none !important;
+}
+
+/* Loading States */
+.loading-overlay {
+    background: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(8px) !important;
+}
+
+.loading-text {
+    color: #2c3e50 !important;
+    font-size: 18px !important;
+    font-weight: 600 !important;
+    text-shadow: none !important;
+}
+
+/* Pulse Animation */
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.7; }
+    100% { opacity: 1; }
+}
+
+/* Video Recording Controls with Clean Design */
+.question-video-controls {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: rgba(255, 255, 255, 0.9) !important;
+    border-radius: 12px;
+    padding: 15px;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05) !important;
+}
+
+.question-video-btn {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 700 !important;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15) !important;
+}
+
+.question-video-btn.start {
+    background-color: #dc3545 !important;
+    color: white !important;
+}
+
+.question-video-btn.start:hover {
+    background-color: #c82333 !important;
+    transform: scale(1.1) !important;
+}
+
+.question-video-btn.stop {
+    background-color: #6c757d !important;
+    color: white !important;
+}
+
+.question-video-btn.stop:hover {
+    background-color: #5a6268 !important;
+    transform: scale(1.1) !important;
+}
+
+.question-video-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+.question-video-preview {
+    margin-top: 15px;
+    background-color: rgba(255, 255, 255, 0.95) !important;
+    border-radius: 12px;
+    padding: 15px;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05) !important;
+}
+
+.question-video-info {
+    font-size: 14px !important;
+    color: #7f8c8d !important;
+    margin-top: 8px;
+    font-weight: 600 !important;
+    text-shadow: none !important;
+}
+
+.question-upload-fallback {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* Question Result Card with Clean Design */
+.question-result-card {
+    background-color: rgba(255, 255, 255, 0.95) !important;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08) !important;
+}
+
+.question-result-card .question-number {
+    font-weight: 700 !important;
+    margin-right: 15px;
+    color: #2c3e50 !important;
+    font-size: 16px !important;
+    text-shadow: none !important;
+}
+
+/* Per Question Analysis Results */
+.per-question-analysis {
+    margin-top: 25px;
+}
+
+.per-question-analysis h6 {
+    color: #2c3e50 !important;
+    font-weight: 700 !important;
+    font-size: 18px !important;
+    margin-bottom: 18px !important;
+    text-shadow: none !important;
+}
+
+.question-analysis-item {
+    background: rgba(255, 255, 255, 0.95) !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    border-radius: 12px !important;
+    padding: 20px !important;
+    margin-bottom: 15px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08) !important;
+}
+
+.question-analysis-item .question-number {
+    background: linear-gradient(135deg, #667eea, #764ba2) !important;
+    color: white !important;
+    width: 35px !important;
+    height: 35px !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-weight: 700 !important;
+    font-size: 16px !important;
+    box-shadow: 0 3px 10px rgba(102, 126, 234, 0.3) !important;
+}
+
+.question-analysis-item .emotion-info {
+    flex: 1 !important;
+    margin-left: 20px !important;
+}
+
+.question-analysis-item .emotion-name {
+    color: #2c3e50 !important;
+    font-weight: 700 !important;
+    font-size: 16px !important;
+    text-transform: uppercase !important;
+    margin-bottom: 4px !important;
+    text-shadow: none !important;
+}
+
+.question-analysis-item .emotion-confidence {
+    color: #7f8c8d !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    text-shadow: none !important;
+}
+
+/* Recommendations with Clean Design */
+.recommendations-list {
+    background: rgba(255, 255, 255, 0.95) !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    border-radius: 16px !important;
+    padding: 25px !important;
+    margin-top: 25px !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08) !important;
+}
+
+.recommendations-list h6 {
+    color: #2c3e50 !important;
+    font-weight: 700 !important;
+    font-size: 18px !important;
+    margin-bottom: 18px !important;
+    text-shadow: none !important;
+}
+
+.recommendations-list ul {
+    margin: 0 !important;
+    padding-left: 25px !important;
+}
+
+.recommendations-list li {
+    color: #34495e !important;
+    font-size: 16px !important;
+    line-height: 1.6 !important;
+    margin-bottom: 12px !important;
+    font-weight: 500 !important;
+    text-shadow: none !important;
+} 

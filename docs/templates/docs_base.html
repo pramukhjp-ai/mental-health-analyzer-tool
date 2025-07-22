@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ page_title or "Documentation" }}</title>
+    <style>
+        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background: #f8f9fa; }
+        nav { background: #343a40; color: #fff; padding: 1em; }
+        .container { max-width: 900px; margin: 2em auto; background: #fff; padding: 2em; border-radius: 8px; }
+        .toc { background: #f1f3f5; padding: 1em; border-radius: 6px; margin-bottom: 2em; }
+        a { color: #007bff; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .sidebar { float: left; width: 220px; margin-right: 2em; }
+        .main-content { margin-left: 240px; }
+        ul { list-style: none; padding: 0; }
+        li { margin-bottom: 0.5em; }
+    </style>
+</head>
+<body>
+    <nav>
+        <strong>Mental Health Analyzer Docs</strong>
+    </nav>
+    <div class="container">
+        <div class="sidebar">
+            <h4>Navigation</h4>
+            {% for section in navigation %}
+                <strong>{{ section.title }}</strong>
+                <ul>
+                {% for page in section.pages %}
+                    <li><a href="/docs/{{ page.name }}" {% if current_page == page.name %}style="font-weight:bold;"{% endif %}>{{ page.title }}</a></li>
+                {% endfor %}
+                </ul>
+            {% endfor %}
+        </div>
+        <div class="main-content">
+            {% if toc %}
+            <div class="toc">
+                <h4>Table of Contents</h4>
+                {{ toc|safe }}
+            </div>
+            {% endif %}
+            {{ content|safe }}
+        </div>
+    </div>
+</body>
+</html> 

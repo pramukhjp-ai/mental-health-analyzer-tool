@@ -1,0 +1,110 @@
+---
+alwaysApply: true
+
+project: mental-health-analyzer
+strictMode: true
+
+onProjectOpen:
+  openFiles:
+    - requirement.md
+    - app.py
+    - templates/index.html
+    - analysis/text_analysis.py
+    - analysis/voice_analysis.py
+    - analysis/facial_analysis.py
+  runCommand: python app.py
+  showPreview: requirement.md
+
+rules:
+
+  # Universal rule
+  - pattern: "**/*"
+    commands:
+      - Silent execution unless user input is essential
+      - Disable cosmetic/LLM suggestions
+      - Allow syntax validation + quality enforcement only
+    enforce:
+      preventLLMCalls: true
+      preventAIOverwrites: true
+      preventDisruptiveInterruptions: true
+      allowMLFixesAndTestCases: true
+      allowUnitTestRefactor: true
+
+  # Python backend logic
+  - pattern: "**/*.py"
+    tools: ["Python"]
+    enforce:
+      allowAutoPEP8: true
+      allowBugFixes: true
+      allowMLLogicCompletion: true
+      preventLLMTextGeneration: true
+
+  # ML logic analysis files
+  - pattern: "analysis/*.py"
+    tools: ["scikit-learn", "NLTK", "TextBlob", "librosa", "cv2", "keras"]
+    enforce:
+      mustFollowMLStructure: true
+      mustUseOfflineModel: true
+      mustNotUseOpenAIAPIs: true
+      allowAccuracyChecks: true
+
+  # HTML Templates (Frontend)
+  - pattern: "templates/**/*.html"
+    tools: ["HTML", "JS", "Bootstrap"]
+    enforce:
+      mustSupportAllInputTabs: true
+      allowFormLogic: true
+      preventTemplateAutoRewrite: true
+
+  # JavaScript (Recording + UI)
+  - pattern: "static/js/**/*.js"
+    tools: ["RecorderJS", "NativeAPI"]
+    enforce:
+      mustHandleRecordingLocally: true
+
+  # Markdown documentation
+  - pattern: "requirement.md"
+    tools: ["Markdown", "LivePreview"]
+    enforce:
+      mustStayReadOnly: true
+      mustBeVisibleAlways: true
+
+  # Models
+  - pattern: "models/*.pkl"
+    tools: ["Joblib", "Offline"]
+    enforce:
+      mustLoadOffline: true
+
+  # Questionnaire data
+  - pattern: "questions/questions.json"
+    tools: ["JSON"]
+    enforce:
+      mustContainExactly5Questions: true
+
+  # New critical safety rule: Don't break frontend/backend connectivity
+  - pattern: "**/*.{html,js,py}"
+    enforce:
+      mustNotBreakExistingFunctionality: true
+      mustNotRemoveExistingEndpoints: true
+      mustMaintainUIBindings: true
+
+settings:
+  preferredPythonVersion: "3.10"
+  autoInstallDependencies: true
+  projectMode: offline-only
+  disableLLMSuggestions: true
+  disableInterruptiveConfirmations: true
+  enablePEP8Checks: true
+  showErrorsIfCritical: true
+  logAllExecution: true
+
+security:
+  disallowExternalDataCalls: true
+  noOpenAIOrLLMKeys: true
+
+demoSettings:
+  demoTimer: "30 minutes"
+  allowBargainTime: "10 minutes grace"
+  enableTimerOnScreen: true
+  autoSaveEvery: "1 minute"
+  snapshotProjectStateEvery: "5 minutes"

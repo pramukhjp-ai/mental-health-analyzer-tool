@@ -1,0 +1,1256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindScope AI - Advanced Mental Health Analytics Platform</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    
+    <!-- Bootstrap 5.3 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --warning-gradient: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            --dark-gradient: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            --glass-bg: rgba(255, 255, 255, 0.08);
+            --glass-border: rgba(255, 255, 255, 0.12);
+            --text-primary: #2d3748;
+            --text-secondary: #718096;
+            --shadow-primary: 0 20px 40px rgba(102, 126, 234, 0.15);
+            --shadow-secondary: 0 10px 25px rgba(0, 0, 0, 0.1);
+            --border-radius: 20px;
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.3) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .main-container {
+            position: relative;
+            z-index: 1;
+            backdrop-filter: blur(10px);
+            min-height: 100vh;
+        }
+
+        /* Header Section */
+        .header-section {
+            padding: 2rem 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .logo-container {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            padding: 1rem 2rem;
+            background: rgba(255, 255, 255, 0.95);
+            border: 2px solid rgba(102, 126, 234, 0.3);
+            border-radius: var(--border-radius);
+            backdrop-filter: blur(20px);
+            transition: var(--transition);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(102, 126, 234, 0.3);
+            border-color: rgba(102, 126, 234, 0.5);
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            background: var(--primary-gradient);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow-secondary);
+        }
+
+        .logo i {
+            color: white;
+            font-size: 1.8rem;
+        }
+
+        .brand-text h1 {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
+            font-size: 2.5rem;
+            margin: 0;
+            letter-spacing: -0.02em;
+        }
+
+        .brand-text p {
+            color: #7f8c8d;
+            font-weight: 500;
+            margin: 0;
+            font-size: 1.1rem;
+        }
+
+        /* Glass Card */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            border: 2px solid rgba(102, 126, 234, 0.2);
+            border-radius: var(--border-radius);
+            backdrop-filter: blur(20px);
+            padding: 2rem;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(102, 126, 234, 0.2);
+            border-color: rgba(102, 126, 234, 0.4);
+        }
+
+        /* Enhanced Tabs */
+        .nav-tabs {
+            border: none;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: var(--border-radius);
+            padding: 0.5rem;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(102, 126, 234, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-tabs .nav-link {
+            border: none;
+            border-radius: 15px;
+            padding: 1rem 1.5rem;
+            margin: 0 0.25rem;
+            background: transparent;
+            color: #7f8c8d;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-tabs .nav-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: var(--transition);
+        }
+
+        .nav-tabs .nav-link:hover::before {
+            left: 100%;
+        }
+
+        .nav-tabs .nav-link.active {
+            background: var(--primary-gradient);
+            color: white;
+            box-shadow: var(--shadow-secondary);
+            transform: scale(1.02);
+        }
+
+        .nav-tabs .nav-link i {
+            font-size: 1.1rem;
+        }
+
+        /* Form Controls */
+        .form-control, .form-select {
+            background: rgba(255, 255, 255, 0.95);
+            border: 2px solid rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            color: #2c3e50;
+            font-weight: 500;
+            padding: 1rem 1.25rem;
+            font-size: 1rem;
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+        }
+
+        .form-control:focus, .form-select:focus {
+            background: rgba(255, 255, 255, 1);
+            border-color: #667eea;
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+            color: #2c3e50;
+        }
+
+        .form-control::placeholder {
+            color: #7f8c8d;
+            font-weight: 400;
+        }
+
+        /* Premium Buttons */
+        .btn-primary {
+            background: var(--primary-gradient);
+            border: none;
+            border-radius: 15px;
+            padding: 1rem 2rem;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-secondary);
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: var(--transition);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-primary);
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+
+        .btn-success {
+            background: var(--success-gradient);
+            border: none;
+            border-radius: 15px;
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+            transition: var(--transition);
+            box-shadow: var(--shadow-secondary);
+        }
+
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(79, 172, 254, 0.3);
+        }
+
+        .btn-danger {
+            background: var(--secondary-gradient);
+            border: none;
+            border-radius: 15px;
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+            transition: var(--transition);
+            box-shadow: var(--shadow-secondary);
+        }
+
+        .btn-danger:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(245, 87, 108, 0.3);
+        }
+
+        /* Question Cards - Enhanced Readability */
+        .question-card {
+            background: rgba(255, 255, 255, 0.95);
+            border: 2px solid rgba(102, 126, 234, 0.2);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(20px);
+        }
+
+        .question-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--primary-gradient);
+            border-radius: 0 2px 2px 0;
+        }
+
+        .question-card:hover {
+            background: rgba(255, 255, 255, 1);
+            transform: translateX(5px);
+            box-shadow: 0 12px 40px rgba(102, 126, 234, 0.2);
+            border-color: rgba(102, 126, 234, 0.4);
+        }
+
+        .question-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            background: var(--primary-gradient);
+            color: white;
+            border-radius: 50%;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            box-shadow: var(--shadow-secondary);
+        }
+
+        .question-text {
+            color: #2c3e50;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        /* Enhanced Video Recording Controls */
+        .question-recording-controls, .question-video-controls {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            margin-top: 1rem;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            border: 2px solid rgba(102, 126, 234, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(20px);
+        }
+
+        .question-record-btn, .question-video-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            cursor: pointer;
+            font-weight: 700;
+        }
+
+        .question-record-btn.start, .question-video-btn.start {
+            background: linear-gradient(135deg, #00b894, #00a085);
+            color: white;
+        }
+
+        .question-record-btn.start:hover, .question-video-btn.start:hover {
+            background: linear-gradient(135deg, #00d1a9, #00b894);
+            transform: scale(1.1);
+            box-shadow: 0 8px 30px rgba(0, 184, 148, 0.4);
+        }
+
+        .question-record-btn.stop, .question-video-btn.stop {
+            background: linear-gradient(135deg, #ff4757, #ff3742);
+            color: white;
+        }
+
+        .question-record-btn.stop:hover, .question-video-btn.stop:hover {
+            background: linear-gradient(135deg, #ff6b7a, #ff4757);
+            transform: scale(1.1);
+            box-shadow: 0 8px 30px rgba(255, 71, 87, 0.4);
+        }
+
+        .question-record-btn.recording, .question-video-btn.recording {
+            animation: recordingPulse 1.5s infinite;
+        }
+
+        .question-record-btn:disabled, .question-video-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        @keyframes recordingPulse {
+            0% { 
+                box-shadow: 0 6px 20px rgba(255, 71, 87, 0.4);
+                transform: scale(1);
+            }
+            50% { 
+                box-shadow: 0 6px 25px rgba(255, 71, 87, 0.6);
+                transform: scale(1.05);
+            }
+            100% { 
+                box-shadow: 0 6px 20px rgba(255, 71, 87, 0.4);
+                transform: scale(1);
+            }
+        }
+
+        .question-status {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            flex: 1;
+        }
+
+        .question-status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1.25rem;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: capitalize;
+            letter-spacing: 0.3px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border: 2px solid transparent;
+            transition: var(--transition);
+        }
+
+        .question-status-badge.ready {
+            background: rgba(255, 255, 255, 0.95);
+            color: #667eea;
+            border-color: rgba(102, 126, 234, 0.3);
+        }
+
+        .question-status-badge.recording {
+            background: linear-gradient(135deg, #ff4757, #ff3742);
+            color: white;
+            animation: recordingBadgePulse 1.5s infinite;
+        }
+
+        .question-status-badge.recorded {
+            background: linear-gradient(135deg, #00b894, #00a085);
+            color: white;
+        }
+
+        @keyframes recordingBadgePulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+
+        .question-timer {
+            color: #2c3e50;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1rem;
+            font-weight: 700;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Enhanced Text Readability Styles */
+        .instructions-panel {
+            background: rgba(255, 255, 255, 0.95) !important;
+            border: 1px solid rgba(255, 255, 255, 0.8) !important;
+            border-radius: var(--border-radius) !important;
+            padding: 2rem !important;
+            margin-bottom: 2rem !important;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
+            backdrop-filter: blur(20px) !important;
+        }
+
+        .instructions-panel h6,
+        .instructions-panel p,
+        .instructions-panel li {
+            color: #2c3e50 !important;
+            font-weight: 500 !important;
+        }
+
+        .instructions-panel h6 {
+            font-weight: 700 !important;
+            font-size: 1.2rem !important;
+            margin-bottom: 1rem !important;
+        }
+
+        .instructions-panel p {
+            font-size: 1rem !important;
+            line-height: 1.6 !important;
+            margin-bottom: 1rem !important;
+        }
+
+        .instructions-panel li {
+            font-size: 0.95rem !important;
+            margin-bottom: 0.5rem !important;
+        }
+
+        /* Results Panel Text */
+        .results-panel {
+            background: rgba(255, 255, 255, 0.95) !important;
+            border: 1px solid rgba(255, 255, 255, 0.8) !important;
+            border-radius: var(--border-radius) !important;
+            padding: 2rem !important;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
+            backdrop-filter: blur(20px) !important;
+        }
+
+        .results-panel h6,
+        .results-panel p,
+        .results-panel li,
+        .results-panel span,
+        .results-panel div {
+            color: #2c3e50 !important;
+        }
+
+        /* All headings and text */
+        h1, h2, h3, h4, h5, h6 {
+            color: #2c3e50 !important;
+        }
+
+        p, span, div, li {
+            color: #34495e !important;
+        }
+
+        /* Tab content text */
+        .tab-content p,
+        .tab-content h6,
+        .tab-content li {
+            color: #2c3e50 !important;
+        }
+
+        .question-audio-preview {
+            margin-top: 0.75rem;
+            padding: 0.75rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .question-audio-preview audio {
+            width: 100%;
+            filter: sepia(100%) saturate(200%) hue-rotate(240deg);
+        }
+
+        .question-audio-info {
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+            text-align: center;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(245, 87, 108, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(245, 87, 108, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(245, 87, 108, 0); }
+        }
+
+        /* File Upload */
+        .file-upload-area {
+            border: 2px dashed rgba(255, 255, 255, 0.3);
+            border-radius: var(--border-radius);
+            padding: 3rem 2rem;
+            text-align: center;
+            transition: var(--transition);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .file-upload-area::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 48%, rgba(255,255,255,0.05) 49%, rgba(255,255,255,0.05) 51%, transparent 52%);
+            background-size: 20px 20px;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .file-upload-area:hover {
+            border-color: #667eea;
+            background: rgba(102, 126, 234, 0.05);
+            transform: scale(1.02);
+        }
+
+        .file-upload-area:hover::before {
+            opacity: 1;
+        }
+
+        .file-upload-area.dragover {
+            border-color: #667eea;
+            background: rgba(102, 126, 234, 0.1);
+            transform: scale(1.05);
+        }
+
+        .upload-icon {
+            font-size: 3rem;
+            color: #667eea;
+            margin-bottom: 1rem;
+            transition: var(--transition);
+        }
+
+        .file-upload-area:hover .upload-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        /* Results Section */
+        .results-container {
+            background: rgba(255, 255, 255, 0.95);
+            border: 2px solid rgba(102, 126, 234, 0.2);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin-top: 2rem;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .metric-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .metric-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--primary-gradient);
+        }
+
+        .metric-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-primary);
+        }
+
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-label {
+            color: var(--text-secondary);
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Loading Animation */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            backdrop-filter: blur(10px);
+        }
+
+        .loading-spinner {
+            width: 80px;
+            height: 80px;
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            border-left: 4px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-top: 1rem;
+            text-align: center;
+        }
+
+        /* Status Indicators */
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .status-badge.positive {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            color: white;
+        }
+
+        .status-badge.neutral {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .status-badge.negative {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .brand-text h1 {
+                font-size: 2rem;
+            }
+            
+            .logo-container {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .glass-card {
+                padding: 1.5rem;
+            }
+            
+            .nav-tabs .nav-link {
+                padding: 0.75rem 1rem;
+                font-size: 0.9rem;
+            }
+            
+            .recording-controls {
+                gap: 0.5rem;
+            }
+            
+            .record-btn {
+                width: 60px;
+                height: 60px;
+                font-size: 1.2rem;
+            }
+        }
+
+        /* Animations */
+        .fade-in {
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .slide-in {
+            animation: slideIn 0.8s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-gradient);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary-gradient);
+        }
+
+        /* Instructions Panel */
+        .instructions-panel {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .instructions-panel h6 {
+            color: white;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .instructions-panel p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .instructions-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .instructions-list li {
+            color: var(--text-secondary);
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.9rem;
+        }
+
+        .instructions-list li::before {
+            content: '✓';
+            background: var(--success-gradient);
+            color: white;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.8rem;
+            flex-shrink: 0;
+        }
+
+        /* Chart Container */
+        .chart-container {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin: 1rem 0;
+            position: relative;
+            height: 300px;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <!-- Header Section -->
+        <div class="header-section">
+            <div class="container">
+                <div class="logo-container fade-in">
+                    <div class="logo">
+                        <i data-lucide="brain"></i>
+                    </div>
+                    <div class="brand-text">
+                        <h1>MindScope AI</h1>
+                        <p>Advanced Mental Health Analytics Platform</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="container">
+            <div class="glass-card fade-in">
+                <!-- Enhanced Navigation Tabs -->
+                <ul class="nav nav-tabs" id="analysisTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="text-tab" data-bs-toggle="tab" data-bs-target="#text" 
+                                type="button" role="tab" aria-controls="text" aria-selected="true">
+                            <i data-lucide="message-square"></i>
+                            Text Analysis
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="voice-tab" data-bs-toggle="tab" data-bs-target="#voice" 
+                                type="button" role="tab" aria-controls="voice" aria-selected="false">
+                            <i data-lucide="mic"></i>
+                            Voice Analysis
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="facial-tab" data-bs-toggle="tab" data-bs-target="#facial" 
+                                type="button" role="tab" aria-controls="facial" aria-selected="false">
+                            <i data-lucide="camera"></i>
+                            Facial Analysis
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="combined-tab" data-bs-toggle="tab" data-bs-target="#combined" 
+                                type="button" role="tab" aria-controls="combined" aria-selected="false">
+                            <i data-lucide="activity"></i>
+                            Combined Analysis
+                        </button>
+                    </li>
+                </ul>
+
+                <!-- Tab Content -->
+                <div class="tab-content" id="analysisTabContent">
+                    <!-- Text Analysis Tab -->
+                    <div class="tab-pane fade show active" id="text" role="tabpanel" aria-labelledby="text-tab">
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <div class="instructions-panel slide-in">
+                                    <h6><i data-lucide="info"></i> Text Response Analysis</h6>
+                                    <p>Share your thoughts and feelings through written responses. Our AI analyzes sentiment, emotional patterns, and linguistic indicators to provide insights into your mental state.</p>
+                                    <ul class="instructions-list">
+                                        <li>Be honest and open in your responses</li>
+                                        <li>Use complete sentences for better analysis</li>
+                                        <li>Take your time to reflect before answering</li>
+                                    </ul>
+                                </div>
+
+                                <form id="textForm">
+                                    <div id="textQuestions" class="questions-container">
+                                        <!-- Questions will be loaded here -->
+                                    </div>
+                                    <div class="text-center">
+                                        <button type="submit" class="btn btn-primary">
+                                            <i data-lucide="brain"></i>
+                                            Analyze Text Responses
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="results-container" id="textResults">
+                                    <h6 class="text-white mb-3">
+                                        <i data-lucide="bar-chart-3"></i>
+                                        Analysis Results
+                                    </h6>
+                                    <div class="text-center text-muted">
+                                        <i data-lucide="clipboard" style="font-size: 3rem; opacity: 0.3;"></i>
+                                        <p class="mt-2">Complete the analysis to see results</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Voice Analysis Tab -->
+                    <div class="tab-pane fade" id="voice" role="tabpanel" aria-labelledby="voice-tab">
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <div class="instructions-panel slide-in">
+                                    <h6><i data-lucide="mic"></i> Voice Emotion Analysis</h6>
+                                    <p>Record your voice responses to each question individually. Our AI analyzes vocal patterns, tone, and acoustic features to detect emotional states and stress indicators.</p>
+                                    <ul class="instructions-list">
+                                        <li>Record each question separately for better analysis</li>
+                                        <li>Speak naturally and clearly for each response</li>
+                                        <li>Find a quiet environment for recording</li>
+                                        <li>Express yourself authentically</li>
+                                    </ul>
+                                </div>
+
+                                <form id="voiceForm">
+                                    <div id="voiceQuestions" class="questions-container">
+                                        <!-- Questions will be loaded here with individual recording controls -->
+                                    </div>
+                                    
+                                    <div class="text-center mt-4">
+                                        <button type="submit" class="btn btn-primary" id="analyzeVoiceBtn" disabled>
+                                            <i data-lucide="brain"></i>
+                                            Analyze All Voice Responses
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="results-container" id="voiceResults">
+                                    <h6 class="text-white mb-3">
+                                        <i data-lucide="activity"></i>
+                                        Voice Analysis Results
+                                    </h6>
+                                    <div class="text-center text-muted">
+                                        <i data-lucide="headphones" style="font-size: 3rem; opacity: 0.3;"></i>
+                                        <p class="mt-2">Record responses to all questions to see analysis</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Facial Analysis Tab -->
+                    <div class="tab-pane fade" id="facial" role="tabpanel" aria-labelledby="facial-tab">
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <div class="instructions-panel slide-in">
+                                    <h6><i data-lucide="camera"></i> Facial Expression Analysis</h6>
+                                    <p>Record or upload a short video response to each question. Our AI analyzes facial expressions from each response.</p>
+                                    <ul class="instructions-list">
+                                        <li>Ensure good lighting</li>
+                                        <li>Face the camera directly</li>
+                                        <li>Record naturally</li>
+                                    </ul>
+                                </div>
+
+                                <form id="facialForm">
+                                    <div id="facialQuestions" class="questions-container">
+                                        <!-- Questions will be loaded here -->
+                                    </div>
+                                    
+                                    <div class="text-center mt-4">
+                                        <button type="button" class="btn btn-primary" id="analyzeFacialBtn" disabled>
+                                            <i data-lucide="scan-face"></i>
+                                            Analyze All Facial Responses
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="results-container" id="facialResults">
+                                    <h6 class="text-white mb-3">
+                                        <i data-lucide="scan"></i>
+                                        Facial Analysis
+                                    </h6>
+                                    <div class="text-center text-muted">
+                                        <i data-lucide="camera" style="font-size: 3rem; opacity: 0.3;"></i>
+                                        <p class="mt-2">Upload media to see facial analysis</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Combined Analysis Tab -->
+                    <div class="tab-pane fade" id="combined" role="tabpanel" aria-labelledby="combined-tab">
+                        <div class="instructions-panel slide-in">
+                            <h6><i data-lucide="activity"></i> Comprehensive Mental Health Assessment</h6>
+                            <p>Get a complete analysis combining all your inputs - text responses, voice patterns, and facial expressions for a holistic mental health assessment.</p>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="metric-card">
+                                    <div class="metric-value" id="combinedTextScore">--</div>
+                                    <div class="metric-label">Text Analysis</div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="metric-card">
+                                    <div class="metric-value" id="combinedVoiceScore">--</div>
+                                    <div class="metric-label">Voice Analysis</div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="metric-card">
+                                    <div class="metric-value" id="combinedFacialScore">--</div>
+                                    <div class="metric-label">Facial Analysis</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="results-container mt-4" id="combinedResults">
+                            <h6 class="text-white mb-3">
+                                <i data-lucide="trending-up"></i>
+                                Comprehensive Assessment
+                            </h6>
+                            <div class="chart-container">
+                                <canvas id="combinedChart"></canvas>
+                            </div>
+                            <div class="text-center mt-4">
+                                <button class="btn btn-primary" id="generateReportBtn">
+                                    <i data-lucide="file-text"></i>
+                                    Generate Detailed Report
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="text-center">
+            <div class="loading-spinner"></div>
+            <div class="loading-text" id="loadingText">Processing your data...</div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/js/voiceRecorder.js"></script>
+    <script src="/static/js/app.js"></script>
+    
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+        
+        // Add smooth scrolling and animations
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add fade-in animation to elements
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('fade-in');
+                    }
+                });
+            }, observerOptions);
+            
+            // Observe all elements that should animate
+            document.querySelectorAll('.glass-card, .question-card, .metric-card').forEach(el => {
+                observer.observe(el);
+            });
+            
+            // Add tab switching animations
+            document.querySelectorAll('[data-bs-toggle="tab"]').forEach(tab => {
+                tab.addEventListener('shown.bs.tab', function(e) {
+                    const targetPane = document.querySelector(e.target.getAttribute('data-bs-target'));
+                    targetPane.classList.add('slide-in');
+                    
+                    // Reinitialize Lucide icons in the new tab
+                    lucide.createIcons();
+                });
+            });
+        });
+        
+        // Enhanced loading states
+        function showLoading(message = 'Processing your data...') {
+            document.getElementById('loadingText').textContent = message;
+            document.getElementById('loadingOverlay').style.display = 'flex';
+        }
+        
+        function hideLoading() {
+            document.getElementById('loadingOverlay').style.display = 'none';
+        }
+        
+        // Remove the file upload drag and drop code that's causing errors
+        // const uploadArea = document.getElementById('facialUploadArea');
+        // const fileInput = document.getElementById('facialFileInput');
+        // 
+        // ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+        //     uploadArea.addEventListener(eventName, preventDefaults, false);
+        // });
+        // 
+        // function preventDefaults(e) {
+        //     e.preventDefault();
+        //     e.stopPropagation();
+        // }
+        // 
+        // ['dragenter', 'dragover'].forEach(eventName => {
+        //     uploadArea.addEventListener(eventName, () => uploadArea.classList.add('dragover'), false);
+        // });
+        // 
+        // ['dragleave', 'drop'].forEach(eventName => {
+        //     uploadArea.addEventListener(eventName, () => uploadArea.classList.remove('dragover'), false);
+        // });
+        // 
+        // uploadArea.addEventListener('drop', handleDrop, false);
+        // 
+        // function handleDrop(e) {
+        //     const dt = e.dataTransfer;
+        //     const files = dt.files;
+        //     
+        //     if (files.length > 0) {
+        //         fileInput.files = files;
+        //         handleFileSelect();
+        //     }
+        // }
+        // 
+        // fileInput.addEventListener('change', handleFileSelect);
+        // 
+        // function handleFileSelect() {
+        //     const file = fileInput.files[0];
+        //     if (file) {
+        //         const preview = document.getElementById('facialPreview');
+        //         const previewContent = document.getElementById('facialPreviewContent');
+        //         
+        //         preview.style.display = 'block';
+        //         
+        //         if (file.type.startsWith('image/')) {
+        //             previewContent.innerHTML = `<img src="${URL.createObjectURL(file)}" class="img-fluid rounded" style="max-height: 200px;">`;
+        //         } else if (file.type.startsWith('video/')) {
+        //             previewContent.innerHTML = `<video controls class="w-100 rounded" style="max-height: 200px;"><source src="${URL.createObjectURL(file)}"></video>`;
+        //         }
+        //         
+        //         document.getElementById('analyzeFacialBtn').disabled = false;
+        //     }
+        // }
+    </script>
+</body>
+</html> 

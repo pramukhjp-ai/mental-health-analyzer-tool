@@ -193,15 +193,39 @@ def not_found(error):
                          page_title='Page Not Found'), 404
 
 if __name__ == '__main__':
+    import argparse
+    
+    # Parse command line arguments
+    parser = argparse.ArgumentParser(description='Mental Health Analyzer Documentation Server')
+    parser.add_argument('--port', type=int, default=8000, 
+                       help='Port to run the documentation server on (default: 8000)')
+    parser.add_argument('--host', type=str, default='127.0.0.1',
+                       help='Host to bind the server to (default: 127.0.0.1)')
+    parser.add_argument('--debug', action='store_true', default=True,
+                       help='Run in debug mode (default: True)')
+    
+    args = parser.parse_args()
+    
     # Create necessary directories
     os.makedirs(DOCS_DIR, exist_ok=True)
     os.makedirs(STATIC_DOCS_DIR, exist_ok=True)
     os.makedirs(TEMPLATES_DOCS_DIR, exist_ok=True)
     
-    # Get port from environment or use default
-    port = int(os.environ.get('DOCS_PORT', 8000))
+    # Get port from command line, environment, or use default
+    port = args.port or int(os.environ.get('DOCS_PORT', 8000))
+    host = args.host
+    debug = args.debug
     
-    print(f"📚 Mental Health Analyzer Documentation starting on http://127.0.0.1:{port}")
+    print(f"📚 Mental Health Analyzer Documentation starting on http://{host}:{port}")
     print("📖 Press Ctrl+C to stop the documentation server")
+    print(f"🔧 Debug mode: {'enabled' if debug else 'disabled'}")
+    print("=" * 60)
     
-    app.run(debug=True, host='127.0.0.1', port=port) 
+    try:
+        app.run(debug=debug, host=host, port=port)
+    except KeyboardInterrupt:
+        print("\n📚 Documentation server stopped by user")
+    except Exception as e:
+        print(f"\n❌ Error starting documentation server: {e}")
+        print("💡 Try using a different port with --port [PORT_NUMBER]")
+        exit(1) 

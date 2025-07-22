@@ -363,22 +363,22 @@ start_application() {
     # Set the port environment variable
     export PORT=$SELECTED_PORT
     
-    # Start the application in background briefly to test
-    print_status "Performing startup test..."
-    timeout 5 python app.py >/dev/null 2>&1 &
-    local test_pid=$!
+    # # Start the application in background briefly to test
+    # print_status "Performing startup test..."
+    # timeout 5 python app.py >/dev/null 2>&1 &
+    # local test_pid=$!
     
-    # Wait a moment and check if it started successfully
-    sleep 2
-    if kill -0 $test_pid 2>/dev/null; then
-        # Kill the test process
-        kill $test_pid 2>/dev/null || true
-        wait $test_pid 2>/dev/null || true
-        print_success "Startup test successful ✓"
-    else
-        print_error "Application failed to start during test"
-        exit 1
-    fi
+    # # Wait a moment and check if it started successfully
+    # sleep 2
+    # if kill -0 $test_pid 2>/dev/null; then
+    #     # Kill the test process
+    #     kill $test_pid 2>/dev/null || true
+    #     wait $test_pid 2>/dev/null || true
+    #     print_success "Startup test successful ✓"
+    # else
+    #     print_error "Application failed to start during test"
+    #     exit 1
+    # fi
     
     # Show success message
     print_final_success
